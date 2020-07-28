@@ -70,14 +70,12 @@ if __name__ == "__main__":
             payload_length=frame_size,
             uri_path=f"/{bucket_name}/{key_name}",
         )
-    r = requests.put(request_url, data=frame_bytes, headers=headers)
-
-    # HTTP response status code 200 --> no error
-    if r.status_code != 200:
-        print("Error: ")
-
-    pos += frame_size  # increase pointer to next position
-    N -= 1
+        r = requests.put(request_url, data=frame_bytes, headers=headers)
+        # HTTP response status code 200 --> no error
+        if r.status_code != 200:
+            print(f"Error: {status_code}")
+        pos += frame_size  # increase pointer to next position
+        N -= 1
     end = time.perf_counter()
     print("Elapsed time (s): " + str(end - start))
     print("Frame size (bytes): " + str(frame_size))
