@@ -86,7 +86,7 @@ if __name__ == "__main__":
 *s3-rest.py* is a generic S3 REST client which allows to send requests directly
 from the command line.
 Launch without parameters to see options.
-Credentials are read from a configuration file wih the same structure as the
+Credentials are read from a configuration file with the same structure as the
 one described above.
 Request content can be both passed on the command line or read from file.
 Content signing is currently not supported for payloads read from file.
@@ -387,6 +387,13 @@ request header.
 
 Look at `webcam-stream-to-object.py` for an example of how to stream frames
 from a webcam directly into a ceph object and retrieve individual frames.
+
+## URL presigning
+
+It is possible to generate a pre-singed URL with a pre-set expiration time, using the `s3-presign-url.py` script.
+
+Note that url presigning, in addition to simply share an object or a subset of it (through the *range* header),
+does support every single HTTP request, including object creation and streaming through append requests.
 
 ## Web request logger and proxy
 
