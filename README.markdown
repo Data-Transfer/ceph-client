@@ -392,8 +392,10 @@ from a webcam directly into a ceph object and retrieve individual frames.
 
 The code shown in the webcam streaming example shows how to ingest data coming from sensors into 
 Ceph objects. By storing information about the format, size and number of samples in the metadata it
-is possible to keep on adding samples indefinitely than retrieve the sample of interest later on.
+is possible to keep on adding samples indefinitely then retrieve the sample of interest later on.
 Not tested, but it should be possible to search and retrieve individual samples while ingesting.
+
+For any serious use of streaming consider using a C++ client library a sample implemetation is provided [here](https://github.com/ugovaretto/s3-rest).
 
 ## URL presigning
 
