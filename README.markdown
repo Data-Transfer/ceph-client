@@ -387,6 +387,8 @@ mime-type and position and size (which can also be computed), stored as metadata
 Individual pieces can then just be easily retrieved using the "Range=bytes=..."
 request header.
 
+### Real-time streaming
+
 Look at `webcam-stream-to-object.py` for an example of how to stream frames
 from a webcam directly into a ceph object and retrieve individual frames.
 
