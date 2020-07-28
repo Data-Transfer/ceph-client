@@ -419,3 +419,5 @@ Notifications have not been properly tested.
 [AWS S3 Requests](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html)
 
 [Notifications](https://medium.com/analytics-vidhya/automated-data-pipeline-using-ceph-notifications-and-kserving-5e1e9b996661)
+
+[C++ S3 client](https://github.com/ugovaretto/s3-rest)
