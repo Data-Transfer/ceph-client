@@ -3,6 +3,8 @@
 Various examples of how to send REST requests to S3 using only raw URLs + HTTP headers. Used to test Ceph, can be used with any S3-compliant server, or any
 service which uses the AWS header signing algorithm.
 
+Note that regular S3 clients (AWS, minio etc.) do not support the full Ceph API, in particular streaming/appending and meta-data search are not part of the AWS standard, there are also differences in the way the download of single object parts is performed.
+
 `s3v4_rest.py` is a module implementing a generic interface to `S3/Ceph`,
 taking care of building the signed request header and generating the REST URLs,
 MIT licensed. PEP8 compliant, static typing not fully applied everywhere, wont' pass `mypy` validation.
