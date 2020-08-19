@@ -3,7 +3,7 @@
 Various examples of how to send REST requests to S3 using only raw URLs + HTTP headers. Used to test Ceph, can be used with any S3-compliant server, or any
 service which uses the AWS header signing algorithm.
 
-Note that regular S3 clients (AWS, minio etc.) do not support the full Ceph API, in particular streaming/appending and meta-data search are not part of the AWS standard, there are also differences in the way the download of single object parts is performed.
+Note that regular S3 clients (AWS, minio etc.) do not support the full Ceph capabilities, in particular streaming/appending and meta-data search are not part of the AWS standard, there are also differences in the way the download of single object parts is performed. The ability to create appendable objects is important because it automatically enables annotation/editing of metadata after the object has been created which might be useful in some situations.
 
 `s3v4_rest.py` is a module implementing a generic interface to `S3/Ceph`,
 taking care of building the signed request header and generating the REST URLs,
@@ -387,8 +387,17 @@ mime-type and position and size (which can also be computed), stored as metadata
 Individual pieces can then just be easily retrieved using the "Range=bytes=..."
 request header.
 
+### Real-time streaming
+
 Look at `webcam-stream-to-object.py` for an example of how to stream frames
 from a webcam directly into a ceph object and retrieve individual frames.
+
+The code shown in the webcam streaming example shows how to ingest data coming from sensors into 
+Ceph objects. By storing information about the format, size and number of samples in the metadata it
+is possible to keep on adding samples indefinitely then retrieve the sample of interest later on.
+Not tested, but it should be possible to search and retrieve individual samples while ingesting.
+
+For any serious use of streaming consider using a C++ client library, a sample implemetation is provided [here](https://github.com/ugovaretto/s3-rest).
 
 ## URL presigning
 
@@ -419,3 +428,5 @@ Notifications have not been properly tested.
 [AWS S3 Requests](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html)
 
 [Notifications](https://medium.com/analytics-vidhya/automated-data-pipeline-using-ceph-notifications-and-kserving-5e1e9b996661)
+
+[C++ S3 client](https://github.com/ugovaretto/s3-rest)
