@@ -86,7 +86,7 @@ if __name__ == "__main__":
                         required=True,
                         help='json configuration file', type=str)
     parser.add_argument('-p', '--payload', dest='payload', required=False,
-                        help='request body', type=str)
+                        help='request body', type=str, nargs='+')
     parser.add_argument('-f',
                         '--payload_is_file', dest='payload_is_file',
                         required=False, type=bool, const=True,
@@ -100,7 +100,7 @@ if __name__ == "__main__":
                         required=False, type=str,
                         help="';' separated list of key=value pairs")
     parser.add_argument('-e', '--headers', dest='headers', required=False,
-                        type=str,
+                        type=str, nargs='+',
                         help="';' separated list of key=value pairs")
     parser.add_argument('-n', "--save_content_to_file", dest="content_file",
                         required=False, help="save response content to file")
@@ -151,14 +151,15 @@ if __name__ == "__main__":
 
     headers = None
     if args.headers:
-        headers = dict([x.split(":", 1) for x in args.headers.split(";")])
+        h = " ".join(args.headers)
+        headers = dict([x.split(":", 1) for x in h.split(";")])
 
     # if parameter substitution is required and payload is file name
     # then payload must be read from file, substitutions applied and
     # payload_is_file set to False, since substituted content needs to
     # be passed instead
     payload_is_file = args.payload_is_file
-    payload = args.payload
+    payload = " ".join(args.payload) if args.payload else None
     if args.payload and args.payload_is_file and args.subst_params:
         with open(args.payload) as f:
             payload = f.read()

@@ -221,7 +221,7 @@ s3-rest.py -c config_file -p notification.xml -f -m post \
 </Tagging>
 ```
 
-**Add tag reading from xml file and subsituting values**:
+**Add tag reading from xml file and substituting values**:
 
 ```shell
 ./s3-rest.py -m put -b uv-bucket-3 -k key-multipart-test10 -t "tagging=" \
@@ -239,7 +239,7 @@ Response headers: {'x-amz-request-id':
 ```
 
 * `-p` payload (a filename in this case)
-* `-f` specify that payload is filename and contente has to be read from file
+* `-f` specify that payload is filename and content has to be read from file
 * `-x` substitute keys with values in payload (content read from file in this case)
 
 Note that you can set more that one tag at once, just add more tags into

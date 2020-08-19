@@ -1,6 +1,7 @@
 s3-credentials.json
 s3-credentials2.json
 s3-credentials3.json
+s3-credentials3.json
 tmp*
 .vscode
 __pycache__
