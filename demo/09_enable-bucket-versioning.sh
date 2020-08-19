@@ -1,5 +1,6 @@
 #!/bin/env sh
 if [ $# -eq 0 ]; then
+    echo "Enable versioning on bucket, parameters read from XML file"
     echo "usage: $0 <json configuration file> <bucket name>"
     exit 1
 fi

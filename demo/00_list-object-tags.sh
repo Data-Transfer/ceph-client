@@ -1,6 +1,7 @@
 #!/bin/env sh
 if [ $# -eq 0 ]; then
-    echo "usage: $0 <json configuration file> <bucket name>"
+    echo "List object info with tags"
+    echo "usage: $0 <json configuration file> <bucket name> <object name>"
     exit 1
 fi
 ./_check_env.sh
