@@ -6,7 +6,7 @@ import json
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Extract HDUs boundaries as Ceph metadata")
+        print("Extract HDUs boundaries as Ceph metadata and stores them in file <ceph bucket>-bounds")
         print(f"usage: {sys.argv[0]} <id_data_device.fits file> <ceph bucket>",
               file=sys.stderr)
         sys.exit(1)
