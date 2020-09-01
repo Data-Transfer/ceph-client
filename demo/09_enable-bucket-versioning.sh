@@ -5,7 +5,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 ./_check_env.sh
-VERSION_REQ="versioning-request-body.xml"
+VERSION_REQ="09_versioning-request-body.xml"
 CMDLINE="./s3-rest.py -c $1 -m put -b $2 -p $VERSION_REQ -f -t versioning="
 echo "create bucket $2"
 echo "$CMDLINE"
