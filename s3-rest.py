@@ -5,7 +5,7 @@
    __author__     = "Ugo Varetto"
    __credits__    = ["Ugo Varetto", "Luca Cervigni"]
    __license__    = "MIT"
-   __version__    = "0.5"
+   __version__    = "0.6"
    __maintainer__ = "Ugo Varetto"
    __email__      = "ugovaretto@gmail.com"
    __status__     = "Development"
@@ -219,7 +219,13 @@ if __name__ == "__main__":
 
     if args.xml_query and response.text and \
             (content_type in ("application/xml", "text/xml")):
-        ns = {"aws": "http://s3.amazonaws.com/doc/2006-03-01/"}
+        ns = None
+        S3NS = "http://s3.amazonaws.com/doc/2006-03-01/"
+        SNSNS = "https://sns.amazonaws.com/doc/2010-03-31/"
+        if S3NS in response.text:
+            ns = {"aws": S3NS}
+        elif SNSNS in response.text:
+            ns = {"sns": SNSNS}
         root = ET.fromstring(response.content)
         n = root.findall(args.xml_query, ns)
         for i in n:

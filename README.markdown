@@ -419,8 +419,6 @@ a client and responses received from the server.
 
 Under development. Version 0.5.
 
-Notifications have not been properly tested.
-
 ## References
 
 [Ceph S3 requests](https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html/developer_guide/ceph-object-gateway-s3-api#s3-api-put-bucket-lifecycle)

@@ -9,7 +9,7 @@
    __author__     = "Ugo Varetto"
    __credits__    = ["Ugo Varetto", "Luca Cervigni"]
    __license__    = "MIT"
-   __version__    = "0.5"
+   __version__    = "0.6"
    __maintainer__ = "Ugo Varetto"
    __email__      = "ugovaretto@gmail.com"
    __status__     = "Development"
@@ -47,7 +47,7 @@ def _sign(key, msg):
     return hmac.new(key, msg.encode('utf-8'), hashlib.sha256).digest()
 
 
-def _get_signature(key, date_stamp, region_name):
+def _get_signature(key, date_stamp, region_name, service='s3'):
     """Create signature
 
     Args:
@@ -60,7 +60,7 @@ def _get_signature(key, date_stamp, region_name):
     """
     date_k = _sign(('AWS4' + key).encode('utf-8'), date_stamp)
     region_k = _sign(date_k, region_name)
-    service_k = _sign(region_k, 's3')
+    service_k = _sign(region_k, service)
     signing_key = _sign(service_k, 'aws4_request')
     return signing_key
 
@@ -356,7 +356,7 @@ def build_request_url(config: Union[S3Config, str] = None,
         credential_scope + '\n' + \
         hashlib.sha256(canonical_request.encode('utf-8')).hexdigest()
 
-    signing_key = _get_signature(secret_key, datestamp, region)
+    signing_key = _get_signature(secret_key, datestamp, region, service)
 
     # sign string with signing key
     signature = hmac.new(signing_key, string_to_sign.encode(
@@ -552,9 +552,6 @@ def send_s3_request(config: Union[S3Config, str] = None,
             logging.debug("Payload: file " + payload + '\n')
     else:
         data = payload
-        if parameters and not payload and req_method.lower() == 'post':
-            data = parameters
-            #parameters = None
         response = _REQUESTS_METHODS[req_method.lower()](url=request_url,
                                                          data=data,
                                                          params=parameters,
