@@ -9,7 +9,7 @@
    __author__     = "Ugo Varetto"
    __credits__    = ["Ugo Varetto", "Luca Cervigni"]
    __license__    = "MIT"
-   __version__    = "0.6"
+   __version__    = "0.7"
    __maintainer__ = "Ugo Varetto"
    __email__      = "ugovaretto@gmail.com"
    __status__     = "Development"
