@@ -1,6 +1,6 @@
 #!/bin/env sh
 if [ $# -eq 0 ]; then
-    echo "Print usage statistics, redirect 2>&1 when writing to file"
+    echo "Print usage statistics, redirect 2>&1 when writing to file~"
     echo "usage: $0 <json configuration file>"
     exit 1
 fi
