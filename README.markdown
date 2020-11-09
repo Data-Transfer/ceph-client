@@ -1,7 +1,7 @@
 # Ceph client connection examples
 
-Various examples of how to send REST requests to S3 using only raw URLs + HTTP headers. Used to test Ceph, can be used with any S3-compliant server, or any
-service which uses the AWS header signing algorithm.
+Various examples of how to send REST requests to S3 using only raw URLs + HTTP headers. Used to test Ceph, works with any S3-compliant server, or any
+service which supports the AWS header signing algorithm.
 
 Note that regular S3 clients (AWS, minio etc.) do not support the full Ceph capabilities, in particular streaming/appending and meta-data search are not part of the AWS standard, there are also differences in the way the download of single object parts is performed. The ability to create appendable objects is important because it automatically enables annotation/editing of metadata after the object has been created which might be useful in some situations.
 
