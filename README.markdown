@@ -13,7 +13,7 @@ In the examples authentication and endpoint information is read from json files 
 
 ```json
 {
-    "version"    : "2",
+    "version"   : "2",
     "access_key": "FFFFFFF",
     "secret_key": "FFFFFFF",
     "protocol"  : "https",
