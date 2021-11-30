@@ -1,4 +1,4 @@
-# Ceph client connection examples
+# Ceph client
 
 Various examples of how to send REST requests to S3 using only raw URLs + HTTP headers. Used to test Ceph, works with any S3-compliant server, or any
 service which supports the AWS header signing algorithm.
