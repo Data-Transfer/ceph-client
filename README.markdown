@@ -7,7 +7,7 @@ Note that regular S3 clients (AWS, minio etc.) do not support the full Ceph capa
 
 `s3v4_rest.py` is a module implementing a generic interface to `S3/Ceph`,
 taking care of building the signed request header and generating the REST URLs,
-MIT licensed. PEP8 compliant, static typing not fully applied everywhere, wont' pass `mypy` validation.
+MIT licensed. PEP8 compliant, static typing not fully applied everywhere, won't pass `mypy` validation.
 
 In the examples authentication and endpoint information is read from json files with the following format:
 
