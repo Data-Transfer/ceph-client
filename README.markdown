@@ -403,7 +403,7 @@ For any serious use of streaming consider using a C++ client library, a sample i
 
 It is possible to generate a pre-singed URL with a pre-set expiration time, using the `s3-presign-url.py` script.
 
-Note that url presigning, in addition to simply share an object or a subset of it (through the *range* header),
+Note that url presigning, in addition to simply sharing an object or a subset of it (through the *range* header),
 does support every single HTTP request, including object creation and streaming through append requests.
 
 ## Web request logger and proxy
