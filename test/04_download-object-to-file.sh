@@ -1,7 +1,7 @@
 #!/bin/env sh
 if [ $# -eq 0 ]; then
     echo "Download object to file"
-    echo "usage: $0 <json configuration file> <bucket name> <object name>"
+    echo "usage: $0 <json configuration file> <bucket name> <object name> <file name>"
     exit 1
 fi
 ./_check_env.sh

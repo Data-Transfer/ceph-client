@@ -1,7 +1,8 @@
 #!/bin/env sh
 if [ $# -eq 0 ]; then
     echo "Create appendable object and append data to it"
-    echo "location of next append operation is returned"
+    echo "location of next append operation is returned."
+    echo "The first append must hapen at position 0."
     echo "usage: $0 <json configuration file> <bucket name> <object name> <content> <location>"
     exit 1
 fi
