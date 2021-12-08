@@ -22,7 +22,7 @@ In the examples authentication and endpoint information is read from json files 
 }
 ```
 
-Tested with Python 3.7 and 3.8.
+Tested with Python 3.6 - 3.9.
 
 Dependencies
 
