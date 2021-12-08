@@ -9,7 +9,7 @@
    __author__     = "Ugo Varetto"
    __credits__    = ["Ugo Varetto", "Luca Cervigni"]
    __license__    = "MIT"
-   __version__    = "0.7"
+   __version__    = "0.8"
    __maintainer__ = "Ugo Varetto"
    __email__      = "ugovaretto@gmail.com"
    __status__     = "Development"
@@ -89,7 +89,7 @@ def _xml_to_text(node: ET,
 
     Args:
         node (ElementTree.Element): a node in the XML tree
-        indentaion_level (int): indendation level == nesting level in tree
+        indentation_level (int): indentation level == nesting level in tree
         filter (function): ignore nodes for which function returns False
     Returns:
         None
@@ -113,7 +113,7 @@ UNSIGNED_PAYLOAD = "UNSIGNED-PAYLOAD"  # identify payloads with no hash
 
 
 def encode_url(params: Dict):
-    """Forward to urlencode, since we are alrady importing urlib.parse here
+    """Forward to urlencode, since we are already importing urlib.parse here
        do not require client code to re-import it.
 
     Args:
@@ -435,7 +435,8 @@ def send_s3_request(config: Union[S3Config, str] = None,
                     additional_headers: Dict[str, str] = None,
                     content_file: str = None,
                     proxy_endpoint: str = None,
-                    chunk_size: int = 1 << 20) \
+                    chunk_size: int = 1 << 20,
+                    verify_ssl_cert: bool = True) \
         -> requests.Request:
     """Send REST request with headers signed according to S3v4 specification
 
@@ -458,15 +459,15 @@ def send_s3_request(config: Union[S3Config, str] = None,
                                      then this parameter is interpreted
                                      as a filepath, and the file descriptor
                                      returned by 'open' will be passed to the
-                                     'data' paramter of the
+                                     'data' parameter of the
                                      requests.* functions
         sign_payload (bool): sign payload, not currently supported when
                              filepath specified
         bucket_name (str): name of bucket appended to URI: /bucket_name
         key_name (str): name of key appended to URI :/bucket_name/key_name
-        action (str): name of actional appended to URI:
+        action (str): name of action token appended to URI:
                       /bucket_name/key_name/action
-        additiona_headers (Dic[str,str]): additional custom headers, the
+        additional_headers (Dic[str,str]): additional custom headers, the
                                           ones starting with 'x-amz-'
                                           are added to the singed list
         content_file (str): file to store received content
@@ -547,16 +548,19 @@ def send_s3_request(config: Union[S3Config, str] = None,
             data=open(payload, 'rb'),
             params=parameters,
             headers=headers,
-            stream=True)
+            stream=True,
+            verify=verify_ssl_cert)
         if logging.getLogger().level == logging.DEBUG:
             logging.debug("Payload: file " + payload + '\n')
     else:
         data = payload
-        response = _REQUESTS_METHODS[req_method.lower()](url=request_url,
-                                                         data=data,
-                                                         params=parameters,
-                                                         headers=headers,
-                                                         stream=True)
+        response = \
+            _REQUESTS_METHODS[req_method.lower()](url=request_url,
+                                                  data=data,
+                                                  params=parameters,
+                                                  headers=headers,
+                                                  stream=True,
+                                                  verify=verify_ssl_cert)
         if logging.getLogger().level == logging.DEBUG:
             logging.debug("Payload: \n" + (payload or "") + '\n')
 

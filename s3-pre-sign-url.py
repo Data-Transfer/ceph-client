@@ -4,7 +4,7 @@
    __author__       = "Ugo Varetto"
    __credits__      = ["Ugo Varetto", "Luca Cervigni"]
    __license__      = "MIT"
-   __version__      = "0.2"
+   __version__      = "0.8"
    __maintainer__   = "Ugo Varetto"
    __email__        = "ugovaretto@gmail.com"
    __status__       = "Development"
@@ -114,7 +114,7 @@ if __name__ == "__main__":
         description='Generate pre-singed URL for distribution')
     parser.add_argument("-a", "--access_key", type=str, required=True,
                         dest="access_key", help="AWS access key")
-    parser.add_argument("-s", "--secreat_key", type=str, required=True,
+    parser.add_argument("-s", "--secret_key", type=str, required=True,
                         dest="secret_key", help="AWS secret key")
     parser.add_argument("-b", "--bucket", type=str, required=False,
                         dest="bucket", help="bucket name")

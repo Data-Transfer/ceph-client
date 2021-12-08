@@ -397,13 +397,13 @@ Ceph objects. By storing information about the format, size and number of sample
 is possible to keep on adding samples indefinitely then retrieve the sample of interest later on.
 Not tested, but it should be possible to search and retrieve individual samples while ingesting.
 
-For any serious use of streaming consider using a C++ client library, a sample implemetation is provided [here](https://github.com/ugovaretto/s3-rest).
+For any serious use of streaming consider using a C++ client library, a sample implementation is provided [here](https://github.com/ugovaretto/s3-rest).
 
-## URL presigning
+## URL pre-signing
 
 It is possible to generate a pre-singed URL with a pre-set expiration time, using the `s3-presign-url.py` script.
 
-Note that url presigning, in addition to simply sharing an object or a subset of it (through the *range* header),
+Note that url pre-signing, in addition to simply sharing an object or a subset of it (through the *range* header),
 does support every single HTTP request, including object creation and streaming through append requests.
 
 ## Web request logger and proxy
@@ -415,9 +415,35 @@ default is a copy of the received request.
 The web request logger also works as a proxy logging requests received from
 a client and responses received from the server.
 
+## SSH Tunneling
+
+When establishing an SSL tunnel to access and s3 endpoint inside a firewall
+like:
+
+```shell
+      ssh -f -N -L 8080:remote_s3_host_inside_firewall:8080 user@gateway
+```
+
+it is possible to reach the s3 endpoint by adding the following two
+parameters to the command line:
+
+```shell
+      -P "https://localhost:8080" -v
+```
+
+`-P` specifies the proxy address
+
+`-v` disables SSL certificate verification, which would fail because not
+associated with 'localhost'
+
+Note that it is not normally possible to reach an S3 endpoint behind a
+firewall with SSL tunneling and standard clients because the endpoint
+to which the request is sent is 'localhost' and it does not match the actual
+URL used to generate the HMAC hash.
+
 ## Status
 
-Under development. Version 0.5.
+Under development. Version 0.7.
 
 ## References
 

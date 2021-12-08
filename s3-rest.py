@@ -5,7 +5,7 @@
    __author__     = "Ugo Varetto"
    __credits__    = ["Ugo Varetto", "Luca Cervigni"]
    __license__    = "MIT"
-   __version__    = "0.7"
+   __version__    = "0.8"
    __maintainer__ = "Ugo Varetto"
    __email__      = "ugovaretto@gmail.com"
    __status__     = "Development"
@@ -56,9 +56,27 @@
             -H / --search-header= "<header key1>:<value1>;<header key 2>:..."
         xml content through XPath query:
             -X / --search-xml=".//aws:TAGNAME"
-            "aws:" indentifies the AWS XML namespace and shall always be
-            specified when searching for standard reponse tags such as
+            "aws:" identifies the AWS XML namespace and shall always be
+            specified when searching for standard response tags such as
             '<UploadId>'
+            
+    When establishing an SSL tunnel like:
+    
+      ssh -f -N -L 8080:remote_s3_host_inside_firewall:8080 user@gateway
+    
+    it is possible to reach the s3 endpoint by adding the following two
+    parameters to the command line:
+      
+      -P "https://localhost:8080" -v
+      
+    -P specifies the proxy address
+    -v disable SSL certificate verification, which would fail because not
+       associated with 'localhost'
+    
+    Note that it is not normally possible to reach an S3 endpoint behind a 
+    irewall with SSL tunneling and standard clients because the endpoint 
+    to which the request is sent is 'localhost' and does not match the actual
+    URL used to generate the HMAC hash.
 """
 import s3v4_rest as s3
 import requests
@@ -135,6 +153,13 @@ if __name__ == "__main__":
                              '| INFO | DEBUG | RAW or MUTE for no output',
                              default="INFO",
                              dest="log_level")
+    parser.add_argument('-v', '--no-verify-cert', type=bool, required=False,
+                        help='disable SSL certificate verification; ' +
+                             'required when e.g. sending through a proxy ' +
+                             'and SSL tunnel',
+                             default=False, const=True, nargs="?",
+                             dest="no_cert_verify")
+
 
     args = parser.parse_args()
 
@@ -189,7 +214,8 @@ if __name__ == "__main__":
         key_name=args.key,
         additional_headers=headers,
         content_file=args.content_file,
-        proxy_endpoint=args.proxy)
+        proxy_endpoint=args.proxy,
+        verify_ssl_cert=not args.no_cert_verify)
 
     content_type = None
     for k in response.headers.keys():
