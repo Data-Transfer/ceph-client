@@ -42,7 +42,7 @@ def _sign(key, msg):
 
     Args:
         key (str): key
-        msg (str): test to sign
+        msg (str): text to sign
     """
     return hmac.new(key, msg.encode('utf-8'), hashlib.sha256).digest()
 
