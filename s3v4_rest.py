@@ -272,7 +272,7 @@ def build_request_url(config: Union[S3Config, str] = None,
             conf = json.loads(f.read())
 
     req_method = req_method.upper()
-    # no explicit rasing of exceptions because the run-time will already
+    # no explicit raising of exceptions because the run-time will already
     # raise the relevant ones should something fail e.g. in case keys
     # are not found in config dictionary a KeyError exception is thrown.
 
